@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CMHomePage"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/appName"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/on_primary"
+        android:textStyle="bold"
+        android:paddingTop="30dp"/>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/logo_description"
+        android:src="@mipmap/cm_logo_foreground"
+        android:layout_marginVertical="50dp"/>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:weightSum="10"
+        android:layout_marginBottom="150dp">
+
+        <Button
+            android:id="@+id/signInButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:backgroundTint="@color/on_primary"
+            android:textColor="@color/white"
+            android:layout_marginBottom="35dp"
+            android:onClick="goToSignInPage"/>
+
+        <Button
+            android:id="@+id/singInGoogleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icons8_google"
+            android:text="Sign in with Google"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/on_primary"
+            android:onClick="goToGoogle"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Don't have an account? "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/signUpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/sign_up"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+
+</LinearLayout>
