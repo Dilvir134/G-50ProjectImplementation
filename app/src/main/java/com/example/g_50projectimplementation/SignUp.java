@@ -32,6 +32,8 @@ public class SignUp extends AppCompatActivity {
             return insets;
         });
 
+        Util.fixStatusBarColorLight(getWindow());
+
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
         confirmPassword = findViewById(R.id.confirmPasswordEditText);
