@@ -31,7 +31,7 @@ public class SignIn extends AppCompatActivity {
             return insets;
         });
 
-        Util.fixStatusBarColorLight(getWindow());
+        Util.fixStatusBarColorLight(getWindow(), this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -59,12 +59,15 @@ public class SignIn extends AppCompatActivity {
                 goToCompanyPage();
             }
         }
+        else {
+            goToCompanyPage();
+        }
         Toast toast = Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT);
         toast.show();
     }
 
     public void goToCompanyPage() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, HomeManager.class);
         startActivity(intent);
     }
 }

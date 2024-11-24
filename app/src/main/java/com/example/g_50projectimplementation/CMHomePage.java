@@ -32,7 +32,7 @@ public class CMHomePage extends AppCompatActivity {
             return insets;
         });
 
-        Util.fixStatusBarColorLight(getWindow());
+        Util.fixStatusBarColorLight(getWindow(), this);
     }
 
     public void goToSignInPage(View view) {
