@@ -29,6 +29,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             android:text="Email"/>
 
         <EditText
@@ -36,12 +37,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="abc@gmail.com"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/black"
             android:inputType="textEmailAddress"
             android:layout_marginBottom="25dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             android:text="Password"/>
 
         <EditText
@@ -49,12 +53,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/black"
             android:inputType="textPassword"
             android:layout_marginBottom="25dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             android:text="Confirm Password"/>
 
         <EditText
@@ -63,6 +70,8 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:layout_marginBottom="30dp"/>
 
         <Button
