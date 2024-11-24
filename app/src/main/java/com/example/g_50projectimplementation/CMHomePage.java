@@ -33,4 +33,8 @@ public class CMHomePage extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com"));
         startActivity(intent);
     }
+    public void goToSignUpPage(View view) {
+        Intent intent = new Intent(CMHomePage.this, SignUp.class);
+        startActivity(intent);
+    }
 }

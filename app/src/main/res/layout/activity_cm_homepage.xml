@@ -76,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/sign_up"
-            android:textColor="@color/blue" />
+            android:textColor="@color/blue"
+            android:onClick="goToSignUpPage"/>
     </LinearLayout>
 
 </LinearLayout>

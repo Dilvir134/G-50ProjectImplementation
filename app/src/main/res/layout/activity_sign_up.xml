@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn"
+    tools:context=".SignUp"
     android:orientation="vertical"
     android:background="@color/background">
 
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginBottom="150dp">
+        android:layout_marginBottom="25dp">
 
 
         <TextView
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="abc@gmail.com"
             android:inputType="textEmailAddress"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="25dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -51,39 +50,54 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="25dp"/>
 
-        <Button
-            android:id="@+id/loginButton"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"
+            android:text="Confirm Password"/>
+
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
             android:backgroundTint="@color/on_primary"
             android:textColor="@color/white"
-            android:onClick="signIn"/>
+            android:onClick="attemptSignUp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Don't have an account? "
-            android:textColor="@color/black" />
+            android:text="Or sign up with"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"/>
 
-        <TextView
-            android:id="@+id/signUpTextView"
+        <ImageButton
+            android:id="@+id/googleSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/sign_up"
-            android:textColor="@color/blue"
-            android:onClick="goToSignUpPage"/>
+            android:src="@drawable/icons8_google"
+            android:background="@color/background"
+            android:onClick="goToGoogle"/>
     </LinearLayout>
 
 </LinearLayout>

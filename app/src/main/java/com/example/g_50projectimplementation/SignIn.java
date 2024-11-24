@@ -1,6 +1,10 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +13,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class SignIn extends AppCompatActivity {
+
+    private EditText email;
+    private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +27,28 @@ public class SignIn extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        email = findViewById(R.id.emailEditText);
+        password = findViewById(R.id.passwordEditText);
+    }
+
+    public void goToSignUpPage(View view) {
+        Intent intent = new Intent(SignIn.this, SignUp.class);
+        startActivity(intent);
+    }
+
+    public void signIn(View view) {
+        if (email.getText().toString().equals("admin@admin.com")) {
+            if (password.getText().toString().equals("password@123")) {
+                goToCompanyPage();
+            }
+        }
+        Toast toast = Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void goToCompanyPage() {
+        Intent intent = new Intent();
+        startActivity(intent);
     }
 }
