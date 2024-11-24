@@ -9,60 +9,86 @@
     android:orientation="vertical"
     android:background="@color/background">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/on_primary"
+        android:theme="@style/ToolbarTheme"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
+
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/logo_description"
-        android:src="@mipmap/cm_logo_foreground"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="100dp"/>
+        android:src="@mipmap/cm_logo_foreground" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
 
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginBottom="150dp">
-
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"/>
+            android:text="Email"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:hint="abc@gmail.com"
             android:inputType="textEmailAddress"
-            android:layout_marginBottom="50dp"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"/>
+            android:text="Password"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_marginBottom="50dp"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"
             android:backgroundTint="@color/on_primary"
-            android:textColor="@color/white"
-            android:onClick="signIn"/>
+            android:onClick="signIn"
+            android:text="Sign in"
+            android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,9 +107,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="goToSignUpPage"
             android:text="@string/sign_up"
-            android:textColor="@color/blue"
-            android:onClick="goToSignUpPage"/>
+            android:textColor="@color/blue" />
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
 </LinearLayout>

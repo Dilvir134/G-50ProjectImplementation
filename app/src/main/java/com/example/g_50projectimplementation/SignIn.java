@@ -8,9 +8,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Objects;
 
 public class SignIn extends AppCompatActivity {
 
@@ -28,8 +31,21 @@ public class SignIn extends AppCompatActivity {
             return insets;
         });
 
+        Util.fixStatusBarColorLight(getWindow());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     public void goToSignUpPage(View view) {
