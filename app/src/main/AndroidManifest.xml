@@ -13,6 +13,9 @@
         android:theme="@style/Theme.G50ProjectImplementation"
         tools:targetApi="31">
         <activity
+            android:name=".ClientListActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeManager"
             android:exported="false"
             android:label="@string/title_activity_home_manager"

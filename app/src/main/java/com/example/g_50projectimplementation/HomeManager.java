@@ -1,8 +1,11 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -50,6 +53,12 @@ public class HomeManager extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         Util.fixStatusBarColorLight(getWindow(), this);
+
+        ImageButton clientsBtn = findViewById(R.id.btn_clients);
+        clientsBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ClientListActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
