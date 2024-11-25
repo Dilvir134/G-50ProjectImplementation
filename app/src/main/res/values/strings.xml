@@ -3,4 +3,13 @@
     <string name="logo_description">App Logo</string>
     <string name="appName">CLEAN MAESTRO</string>
     <string name="sign_up"><u>Sign Up</u></string>
+    <string name="title_activity_home_manager">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Clean Maestro</string>
+    <string name="nav_header_desc">Menu</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

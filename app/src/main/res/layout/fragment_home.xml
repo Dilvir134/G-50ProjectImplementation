@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_client"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        >
+
+        <TextView
+            android:id="@+id/label_welcomeBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Welcome Back"
+            android:textColor="@color/grey"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/label_userDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="John Doe"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_text">
+
+        <ImageButton
+            android:id="@+id/btn_clients"
+            android:layout_width="179dp"
+            android:layout_height="179dp"
+            android:background="@drawable/rounded_big_button"
+            android:contentDescription="My Clients"
+            android:elevation="4dp"
+            android:outlineProvider="background"
+            android:src="@drawable/lucide_hotel" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:id="@+id/label_myClients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="My Clients"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_team"
+            android:layout_width="179dp"
+            android:layout_height="179dp"
+            android:background="@drawable/rounded_big_button"
+            android:elevation="4dp"
+            android:outlineProvider="background"
+            android:src="@drawable/formkit_people" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:id="@+id/label_team"
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Team &amp; Resources"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
