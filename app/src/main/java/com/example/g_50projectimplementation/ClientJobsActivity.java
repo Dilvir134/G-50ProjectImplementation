@@ -19,6 +19,13 @@ public class ClientJobsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_client_and_jobs);
 
+        Button addJobButton = findViewById(R.id.addJobButton);
+
+        addJobButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ClientJobsActivity.this, AddJobActivity.class);
+            startActivity(intent);
+        });
+
         // References to UI elements
         LinearLayout jobsContainer = findViewById(R.id.jobsContainer);
 

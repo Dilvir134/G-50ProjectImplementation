@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,7 +27,47 @@ public class AddJobActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_job); // Update layout name if needed
+        setContentView(R.layout.activity_add_job);
+
+        Button saveJobButton = findViewById(R.id.btnAssignTask);
+        TextView addJobLaterLink = findViewById(R.id.linkAssignTaskLater);
+        TextView cancelLink = findViewById(R.id.cancel_link);
+        TextView saveJobLink = findViewById(R.id.save_job_link);
+
+        cancelLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to ClientJobsActivity
+                navigateToClientJobsActivity();
+                //finish();
+            }
+        });
+
+        saveJobLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to ClientJobsActivity
+                navigateToClientJobsActivity();
+            }
+        });
+
+        saveJobButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to ClientJobsActivity
+                navigateToClientJobsActivity();
+            }
+        });
+
+        addJobLaterLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to ClientJobsActivity
+                navigateToClientJobsActivity();
+            }
+        });
+
+
 
         inputStartDateTime = findViewById(R.id.input_start_datetime);
         inputEndDateTime = findViewById(R.id.input_end_datetime);
@@ -66,6 +110,13 @@ public class AddJobActivity extends Activity {
         supervisorSpinner.setAdapter(adapter);
     }
 
+    // Method to navigate to ClientJobsActivity
+    private void navigateToClientJobsActivity() {
+        Intent intent = new Intent(AddJobActivity.this, ClientJobsActivity.class);
+        startActivity(intent);
+        //finish(); // Optional
+    }
+
     private void showDateTimePicker(EditText targetEditText) {
         // Show Date Picker Dialog
         new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
@@ -78,7 +129,7 @@ public class AddJobActivity extends Activity {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
 
-                // Set the chosen date and time in the target EditText
+                // Set the chosen date and time in the EditText
                 String dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
                         .format(calendar.getTime());
                 targetEditText.setText(dateTime);
