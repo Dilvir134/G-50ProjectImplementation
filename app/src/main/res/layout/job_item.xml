@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/job_item_background"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/jobTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Job Title"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/jobDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Job Date"
+        android:textSize="14sp"
+        android:textColor="@color/gray" />
+</LinearLayout>

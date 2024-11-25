@@ -7,4 +7,10 @@
     <color name="primary">#EADDFF</color>
     <color name="background">#F7F7F7</color>
     <color name="blue">#1C9DFF</color>
+    <color name="gray">#808080</color>
+    <color name="purple_700">#6200EE</color>
+    <color name="dark_purple">#4B0082</color>
+
+
+
 </resources>
