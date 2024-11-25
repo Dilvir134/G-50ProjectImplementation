@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Cancel Button -->
+        <TextView
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Logo Placeholder -->
+        <ImageView
+            android:id="@+id/logo_placeholder"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/hard_rock_cafe_logo"
+            android:contentDescription="Logo Placeholder"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cancel_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Add Logo Link -->
+        <TextView
+            android:id="@+id/add_logo_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Logo"
+            android:textColor="@android:color/holo_blue_dark"
+            app:layout_constraintTop_toBottomOf="@id/logo_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Company Name Input -->
+        <EditText
+            android:id="@+id/company_name_input"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Company Name"
+            android:inputType="text"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/add_logo_link"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Contact Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/contact_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/company_name_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Add Contact Input -->
+                <EditText
+                    android:id="@+id/add_contact_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Add Contact"
+                    android:inputType="text" />
+
+                <!-- First Name Input -->
+                <EditText
+                    android:id="@+id/first_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="First Name"
+                    android:inputType="text"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Last Name Input -->
+                <EditText
+                    android:id="@+id/last_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Last Name"
+                    android:inputType="text"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Add From Contact Link -->
+        <TextView
+            android:id="@+id/add_from_contact_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add From Contact"
+            android:textColor="@android:color/holo_blue_dark"
+            app:layout_constraintTop_toBottomOf="@id/contact_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Address Input -->
+        <EditText
+            android:id="@+id/address_input"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Address"
+            android:inputType="textPostalAddress"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/add_from_contact_link"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Category Section -->
+        <LinearLayout
+            android:id="@+id/category_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/address_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Left Arrow -->
+            <ImageView
+                android:id="@+id/left_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="<="
+                android:contentDescription="Left Arrow" />
+
+            <!-- HorizontalScrollView -->
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Categories -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/hotel_logo"
+                        android:text="Hotel"
+                        android:layout_marginEnd="16dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/airbnb_logo"
+                        android:text="Airbnb"
+                        android:layout_marginEnd="16dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/theatre"
+                        android:text="Theatres"
+                        android:layout_marginEnd="16dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Right Arrow -->
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="=>"
+                android:contentDescription="Right Arrow" />
+        </LinearLayout>
+
+        <!-- Add Client Button -->
+        <Button
+            android:id="@+id/add_client_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Client"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/dark_purple"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintTop_toBottomOf="@id/category_section"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.G50ProjectImplementation"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ClientJobsActivity"
+            android:exported="true"/>
+
+
+
+        <!-- Add Job Activity -->
+        <activity
+            android:name=".AddJobActivity"
+            android:exported="true" />
+
         <activity
             android:name=".ClientListActivity"
             android:exported="false" />
