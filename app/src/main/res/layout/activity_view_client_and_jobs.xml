@@ -12,21 +12,34 @@
         android:gravity="center"
         android:paddingTop="16dp">
 
+        <!-- Client Logo -->
         <ImageView
             android:id="@+id/clientLogo"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="84dp"
             android:src="@drawable/hard_rock_cafe_logo" />
 
+        <!-- Client Name -->
         <TextView
             android:id="@+id/clientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard Rock"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="8dp" />
+            android:layout_marginBottom="4dp"
+            android:text="Hard Rock" />
+
+        <!-- Client Location -->
+        <TextView
+            android:id="@+id/clientLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miami, FL"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@color/gray" />
+
     </LinearLayout>
 
     <!-- Edit Button -->
@@ -46,8 +59,6 @@
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground"
         android:padding="4dp" />
-
-
 
     <!-- Upcoming Jobs Section -->
     <ScrollView
@@ -96,7 +107,7 @@
         android:gravity="center"
         android:layout_marginBottom="16dp">
 
-        <!-- Add Job Button -->
+        <!-- Add Job Floating Button -->
         <Button
             android:id="@+id/addJobButton"
             android:layout_width="wrap_content"
@@ -106,35 +117,78 @@
             android:textColor="@color/dark_purple"
             android:layout_marginBottom="8dp"
             android:layout_centerHorizontal="true"
+            android:elevation="4dp"
             android:paddingHorizontal="12dp" />
 
-        <!-- Horizontal Layout for Bottom Buttons -->
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/addJobButton"
+            android:background="@color/gray_light" />
+
+        <!-- Bottom Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/addJobButton"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_below="@id/addJobButton"
             android:paddingTop="8dp">
 
-            <Button
-                android:id="@+id/clientNotesButton"
+            <!-- Client Notes Button -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Client Notes"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/dark_purple"
-                android:layout_marginEnd="8dp"
-                android:paddingHorizontal="12dp" />
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <Button
-                android:id="@+id/callClientButton"
+                <ImageButton
+                    android:id="@+id/clientNotesIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_client_notes"
+                    android:background="@drawable/rounded_icon_button"
+                    android:contentDescription="Client Notes"
+                    android:elevation="2dp" />
+
+                <TextView
+                    android:id="@+id/clientNotesLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Client Notes"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Call Client Button -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Call Client"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/dark_purple"
-                android:paddingHorizontal="12dp" />
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/callClientIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_call"
+                    android:background="@drawable/rounded_icon_button"
+                    android:contentDescription="Call Client"
+                    android:elevation="2dp" />
+
+                <TextView
+                    android:id="@+id/callClientLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call Client"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

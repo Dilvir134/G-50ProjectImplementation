@@ -7,6 +7,7 @@
     android:layout_margin="20dp"
     android:background="@color/primary"
     app:cardElevation="8dp"
+    android:id="@+id/clientCard"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 <LinearLayout
