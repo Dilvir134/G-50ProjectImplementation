@@ -62,8 +62,8 @@ public class SignIn extends AppCompatActivity {
         else {
             goToCompanyPage();
         }
-        Toast toast = Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT);
-        toast.show();
+        //Toast toast = Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT);
+       // toast.show();
     }
 
     public void goToCompanyPage() {

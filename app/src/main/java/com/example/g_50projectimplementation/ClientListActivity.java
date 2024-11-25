@@ -1,7 +1,9 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,6 +65,11 @@ public class ClientListActivity extends AppCompatActivity {
         parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         parentRecyclerView.setAdapter(new ClientGroupedListParentAdapter(groups));
 
+        View fab = findViewById(R.id.extendedFab);
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddClientActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

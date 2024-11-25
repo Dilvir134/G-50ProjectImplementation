@@ -25,6 +25,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".AddClientActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".ClientListActivity"
             android:exported="false" />
         <activity

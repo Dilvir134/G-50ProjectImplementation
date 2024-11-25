@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/main">
 
         <!-- Cancel Button -->
         <TextView
@@ -151,8 +152,8 @@
                 android:id="@+id/left_arrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="<="
-                android:contentDescription="Left Arrow" />
+                android:contentDescription="Left Arrow"
+                android:src="@drawable/baseline_arrow_left_24" />
 
             <!-- HorizontalScrollView -->
             <HorizontalScrollView
@@ -193,8 +194,8 @@
                 android:id="@+id/right_arrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="=>"
-                android:contentDescription="Right Arrow" />
+                android:contentDescription="Right Arrow"
+                android:src="@drawable/baseline_arrow_right_24" />
         </LinearLayout>
 
         <!-- Add Client Button -->
