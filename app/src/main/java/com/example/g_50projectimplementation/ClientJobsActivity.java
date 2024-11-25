@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,13 +45,13 @@ public class ClientJobsActivity extends AppCompatActivity {
         }
 
         // Set up buttons
-        Button callClientButton = findViewById(R.id.callClientButton);
+        ImageButton callClientButton = findViewById(R.id.callClientIcon);
         callClientButton.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:1234567890"));
             startActivity(intent);
         });
 
-        Button clientNotesButton = findViewById(R.id.clientNotesButton);
+        ImageButton clientNotesButton = findViewById(R.id.clientNotesIcon);
         clientNotesButton.setOnClickListener(v -> {
             // Navigate to client notes (implement this activity)
         });
