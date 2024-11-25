@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.g_50projectimplementation.R;
+import com.example.g_50projectimplementation.adapters.model.ClientListCard;
 import com.example.g_50projectimplementation.adapters.model.ClientListCardGroup;
 
 import java.util.List;
@@ -20,6 +21,10 @@ public class ClientGroupedListParentAdapter extends RecyclerView.Adapter<ClientG
 
     public ClientGroupedListParentAdapter(List<ClientListCardGroup> cardGroups) {
         this.cardGroups = cardGroups;
+    }
+
+    public interface OnCardClickListener {
+        void onCardClick(ClientListCard card);
     }
 
     @NonNull
