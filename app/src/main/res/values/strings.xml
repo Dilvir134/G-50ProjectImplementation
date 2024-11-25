@@ -3,7 +3,6 @@
     <string name="logo_description">App Logo</string>
     <string name="appName">CLEAN MAESTRO</string>
     <string name="sign_up"><u>Sign Up</u></string>
-
     <string name="client_notes">Client Notes</string>
     <string name="call_client">Call Client</string>
     <string name="add_job">+ Add Job</string>
@@ -13,5 +12,12 @@
     <string name="clean_building_a">Clean Building A</string>
     <string name="clean_building_b">Clean Building B</string>
     <string name="job_date">10/11/24 - 10/11/24</string>
-
+    <string name="title_activity_home_manager">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Clean Maestro</string>
+    <string name="nav_header_desc">Menu</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

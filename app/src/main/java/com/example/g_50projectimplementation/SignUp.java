@@ -35,7 +35,7 @@ public class SignUp extends AppCompatActivity {
             return insets;
         });
 
-        Util.fixStatusBarColorLight(getWindow());
+        Util.fixStatusBarColorLight(getWindow(), this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
