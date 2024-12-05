@@ -36,14 +36,14 @@ public class ClientGroupedListChildAdapter extends RecyclerView.Adapter<ClientGr
         holder.cardTitle.setText(card.getTitle());
         holder.cardDescription.setText(card.getLocation());
 
-        // Set up click listener for each (Hard Rock for now) card
         holder.itemView.setOnClickListener(v -> {
-            if (card.getTitle().equals("Hard Rock")) { // Check the card title
-                Intent intent = new Intent(holder.itemView.getContext(), ClientJobsActivity.class);
-                holder.itemView.getContext().startActivity(intent);
-            }
+            Intent intent = new Intent(holder.itemView.getContext(), ClientJobsActivity.class);
+            intent.putExtra("CLIENT_NAME", card.getTitle()); // Pass client name
+            intent.putExtra("CLIENT_LOCATION", card.getLocation()); // Pass client location
+            holder.itemView.getContext().startActivity(intent);
         });
     }
+
 
     @Override
     public int getItemCount() {
