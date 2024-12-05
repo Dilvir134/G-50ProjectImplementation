@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.g_50projectimplementation.adapters.ClientAdapter;
+import com.example.g_50projectimplementation.adapters.ClientGroupedListParentAdapter;
+import com.example.g_50projectimplementation.adapters.model.ClientListCard;
+import com.example.g_50projectimplementation.adapters.model.ClientListCardGroup;
 import com.example.g_50projectimplementation.database.AppDatabase;
 import com.example.g_50projectimplementation.database.entity.Client;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -22,6 +25,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ClientListActivity extends AppCompatActivity {
     private AppDatabase db;
@@ -46,19 +50,7 @@ public class ClientListActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        RecyclerView recyclerView = findViewById(R.id.parentRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Fetch clients from the database
-        new Thread(() -> {
-            List<Client> clients = db.clientDao().getAllClients(); // Fetch data from DAO
-            if (clients == null) {
-                clients = new ArrayList<>(); // Ensure a non-null list for the adapter
-            }
-            // Update UI with the client list
-            List<Client> finalClients = clients;
-            runOnUiThread(() -> recyclerView.setAdapter(new ClientAdapter(ClientListActivity.this, finalClients)));
-        }).start();
+        refreshData();
 
         // Add Client Button - Navigates to AddClientActivity
         ExtendedFloatingActionButton addClientButton = findViewById(R.id.extendedFab);
@@ -66,6 +58,33 @@ public class ClientListActivity extends AppCompatActivity {
             Intent intent = new Intent(ClientListActivity.this, AddClientActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData();
+    }
+
+    private void refreshData() {
+        RecyclerView recyclerView = findViewById(R.id.parentRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new Thread(() -> {
+            List<Client> clients = db.clientDao().getAllClients(); // Fetch data from DAO
+            if (clients == null) {
+                clients = new ArrayList<>(); // Ensure a non-null list for the adapter
+            }
+            // Update UI with the client list
+            List<Client> finalClients = clients;
+
+            List<ClientListCard> cards1 = clients.stream()
+                    .map(x -> new ClientListCard(x.getName(), x.getLocation()))
+                    .collect(Collectors.toList());
+            List<ClientListCardGroup> groups = new ArrayList<>();
+            groups.add(new ClientListCardGroup("Ungrouped", cards1));
+
+            runOnUiThread(() -> recyclerView.setAdapter(new ClientGroupedListParentAdapter(groups)));
+        }).start();
     }
 
     @Override
