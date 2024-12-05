@@ -24,6 +24,7 @@ import com.example.g_50projectimplementation.database.entity.Client;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -75,17 +76,30 @@ public class ClientListActivity extends AppCompatActivity {
             if (clients == null) {
                 clients = new ArrayList<>(); // Ensure a non-null list for the adapter
             }
-            // Update UI with the client list
-            List<Client> finalClients = clients;
 
-            List<ClientListCard> cards1 = clients.stream()
-                    .map(x -> new ClientListCard(x.getName(), x.getLocation(),
-                            x.getLogoUrl() != null ? Uri.parse(x.getLogoUrl()) : null))
-                    .collect(Collectors.toList());
+            HashMap<String, List<ClientListCard>> groupsDict = new HashMap<>();
+            for (Client client: clients ) {
+                String cat = client.getCategory() != null ? client.getCategory() : "Ungrouped";
+                if(!groupsDict.containsKey(cat)) {
+                    groupsDict.put(cat, new ArrayList<>());
+                }
+                Objects.requireNonNull(groupsDict.get(cat))
+                        .add(new ClientListCard(client.getName(), client.getLocation(),
+                                client.getLogoUrl() != null ? Uri.parse(client.getLogoUrl()) : null));
+            }
+
             List<ClientListCardGroup> groups = new ArrayList<>();
-            groups.add(new ClientListCardGroup("Ungrouped", cards1));
+            boolean hasSomething = false;
+            for (String key: groupsDict.keySet() ) {
+                groups.add(new ClientListCardGroup(key, groupsDict.get(key)));
+                hasSomething = true;
+            }
+            if(!hasSomething) {
+                groups.add(new ClientListCardGroup("No Clients yet.", new ArrayList<>()));
+            }
 
             runOnUiThread(() -> recyclerView.setAdapter(new ClientGroupedListParentAdapter(groups)));
+
         }).start();
     }
 

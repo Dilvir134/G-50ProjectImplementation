@@ -1,5 +1,6 @@
 package com.example.g_50projectimplementation.database.entity;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "clients")
@@ -11,9 +12,9 @@ public class Client {
     private String contactName;
     private String contactNumber;
     private String logoUrl;
-    /*private String category;*/
+    private String category;
 
-    // Constructor
+    @Ignore
     public Client(String name, String location, String contactName, String contactNumber, String logoUrl) {
         this.name = name;
         this.location = location;
@@ -22,10 +23,10 @@ public class Client {
         this.logoUrl = logoUrl;
     }
 
-    /*public Client(String name, String location, String contactName, String contactNumber, String logoUrl, String category) {
+    public Client(String name, String location, String contactName, String contactNumber, String logoUrl, String category) {
         this(name, location, contactName, contactNumber, logoUrl);
         this.category = category;
-    }*/
+    }
 
     // Getters and Setters
     public int getId() { return id; }
@@ -40,7 +41,7 @@ public class Client {
     public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
     public String getLogoUrl() { return logoUrl; }
     public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
-/*    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }*/
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 }
 

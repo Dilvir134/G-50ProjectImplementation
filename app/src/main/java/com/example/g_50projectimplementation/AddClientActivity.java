@@ -4,19 +4,16 @@ package com.example.g_50projectimplementation;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,8 +24,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -36,7 +31,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.g_50projectimplementation.database.AppDatabase;
 import com.example.g_50projectimplementation.database.entity.Client;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
@@ -61,6 +55,10 @@ public class AddClientActivity extends AppCompatActivity {
     private CardView cardAddImg;
 
     private Uri imageUri = null;
+
+    private ViewGroup categories;
+    private String selectedCategory;
+    private int categoryStrokeWidth;
 
     private final ActivityResultLauncher<Intent> contactPickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -125,6 +123,7 @@ public class AddClientActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
+        // Contact
         contactNameField = findViewById(R.id.contactName);
         contactPhoneField = findViewById(R.id.contactPhone);
         MaterialButton btnPickContact = findViewById(R.id.btnPickContact);
@@ -135,6 +134,7 @@ public class AddClientActivity extends AppCompatActivity {
             contactPickerLauncher.launch(intent);
         });
 
+        // Image
         btnAddImage = findViewById(R.id.btnAddImage);
         imgAddImage = findViewById(R.id.imgAddImage);
         cardAddImg = findViewById(R.id.cardAddImage);
@@ -145,7 +145,24 @@ public class AddClientActivity extends AppCompatActivity {
             imgOnClick();
         });
 
+        // Choose category
+        categories = findViewById(R.id.categories);
+        initCategorySelection();
+        for (int i = 0; i < categories.getChildCount(); i++) {
+            View view = categories.getChildAt(i);
+            view.setOnClickListener(v -> {
+                if(v instanceof MaterialButton) {
+                    MaterialButton btn = (MaterialButton) v;
+                    if (btn.getStrokeWidth() != 0)
+                        return;
+                    btn.setStrokeWidth(categoryStrokeWidth);
+                    selectedCategory = btn.getText().toString();
+                    resetAllOtherCategories();
+                }
+            });
+        }
 
+        // Text fields
         companyNameInput = findViewById(R.id.companyName);
         addressInput = findViewById(R.id.companyAddress);
 
@@ -176,7 +193,8 @@ public class AddClientActivity extends AppCompatActivity {
                 return;
             }
 
-            Client newClient = new Client(name, location, contactName, contactNumber, imageUri != null ? imageUri.toString() : null);
+            Client newClient = new Client(name, location, contactName, contactNumber,
+                    imageUri != null ? imageUri.toString() : null, selectedCategory);
             new Thread(() -> db.clientDao().insert(newClient)).start(); // Database operation on a background thread
 
             finish(); // Return to the previous activity
@@ -186,6 +204,35 @@ public class AddClientActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(l -> {
             finish(); // Go back
         });
+    }
+
+    private void resetAllOtherCategories() {
+        for (int i = 0; i < categories.getChildCount(); i++) {
+            View child = categories.getChildAt(i);
+            if(child instanceof MaterialButton) {
+                MaterialButton btn = (MaterialButton)child;
+                if(!btn.getText().toString().equals(selectedCategory)) {
+                    btn.setStrokeWidth(0);
+                }
+            }
+        }
+    }
+
+    private void initCategorySelection() {
+        boolean foundOne = false;
+        for (int i = 0; i < categories.getChildCount(); i++) {
+            View child = categories.getChildAt(i);
+            if(child instanceof MaterialButton) {
+                MaterialButton btn = (MaterialButton)child;
+                if(!foundOne && btn.getStrokeWidth() > 0) {
+                    categoryStrokeWidth = btn.getStrokeWidth();
+                    selectedCategory = btn.getText().toString();
+                    foundOne = true;
+                } else if (foundOne && btn.getStrokeWidth() > 0) {
+                    btn.setStrokeWidth(0);
+                }
+            }
+        }
     }
 
     private void imgOnClick() {
