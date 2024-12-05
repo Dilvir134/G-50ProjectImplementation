@@ -30,6 +30,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardAddImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
@@ -39,7 +40,7 @@
                     app:cardElevation="4dp">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imgAddImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="Add Image"
