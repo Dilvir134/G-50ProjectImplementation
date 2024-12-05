@@ -1,68 +1,124 @@
-<ScrollView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
+    <!-- Client Logo -->
+    <ImageView
+        android:id="@+id/clientLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/hard_rock_cafe_logo"
+        android:contentDescription="@string/client_logo"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Client Name -->
+    <TextView
+        android:id="@+id/clientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Hard Rock"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Client Location -->
+    <TextView
+        android:id="@+id/clientLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Miami, FL"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Section Title -->
+    <TextView
+        android:id="@+id/upcomingJobsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="6 Upcoming Jobs:"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Jobs List -->
     <LinearLayout
+        android:id="@+id/jobsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Client Name -->
-        <TextView
-            android:id="@+id/clientName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Client Name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Client Location -->
-        <TextView
-            android:id="@+id/clientLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Client Location"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Client Contact -->
-        <TextView
-            android:id="@+id/clientContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact Name"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Client Contact Number -->
-        <TextView
-            android:id="@+id/clientContactNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact Number"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Placeholder for Jobs -->
-        <TextView
-            android:id="@+id/upcomingJobsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming Jobs:"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Job Container -->
-        <LinearLayout
-            android:id="@+id/jobsContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:showDividers="middle">
+        <!-- Job Items Dynamically Added -->
     </LinearLayout>
-</ScrollView>
+
+    <!-- Add Job Button -->
+    <Button
+        android:id="@+id/addJobButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Add Job"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="32dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/clientNotesIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_client_notes"
+                android:contentDescription="@string/client_notes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Notes"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/callClientIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_call"
+                android:contentDescription="@string/call_client" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Call Client"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.g_50projectimplementation;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,24 +12,25 @@ public class ClientJobsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_client_and_jobs);
 
-        // Get the data from the Intent
+        // Fetch client data
         String clientName = getIntent().getStringExtra("client_name");
         String clientLocation = getIntent().getStringExtra("client_location");
-        String clientContact = getIntent().getStringExtra("client_contact");
-        String clientContactNumber = getIntent().getStringExtra("client_contact_number");
 
-        // Set the data to the UI
-        TextView clientNameView = findViewById(R.id.clientName);
-        TextView clientLocationView = findViewById(R.id.clientLocation);
+        // Set client data
+        ((TextView) findViewById(R.id.clientName)).setText(clientName);
+        ((TextView) findViewById(R.id.clientLocation)).setText(clientLocation);
 
-        clientNameView.setText(clientName);
-        clientLocationView.setText(clientLocation);
+        // Get jobs data (example hardcoded list for now)
+        String[] jobs = {"Clean Lobby #1", "Clean Lobby #2", "Clean Building A", "Clean Building B"};
 
-        // Additional views for contact info
-        TextView contactView = findViewById(R.id.clientContact);
-        TextView contactNumberView = findViewById(R.id.clientContactNumber);
-
-        if (contactView != null) contactView.setText(clientContact);
-        if (contactNumberView != null) contactNumberView.setText(clientContactNumber);
+        LinearLayout jobsList = findViewById(R.id.jobsList);
+        for (String job : jobs) {
+            TextView jobItem = new TextView(this);
+            jobItem.setText(job);
+            jobItem.setPadding(16, 16, 16, 16);
+            jobItem.setBackgroundResource(R.drawable.job_item_background);
+            jobsList.addView(jobItem);
+        }
     }
+
 }
