@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.g_50projectimplementation.ClientDetailsActivity;
 import com.example.g_50projectimplementation.R;
 import com.example.g_50projectimplementation.adapters.model.ClientListCard;
 import com.example.g_50projectimplementation.ClientJobsActivity;
@@ -39,7 +40,8 @@ public class ClientGroupedListChildAdapter extends RecyclerView.Adapter<ClientGr
         holder.img.setImageURI(card.getImageUri());
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), ClientJobsActivity.class);
+            Intent intent = new Intent(holder.itemView.getContext(), ClientDetailsActivity.class);
+            intent.putExtra("CLIENT_ID", card.getId());
             intent.putExtra("CLIENT_NAME", card.getTitle()); // Pass client name
             intent.putExtra("CLIENT_LOCATION", card.getLocation()); // Pass client location
             holder.itemView.getContext().startActivity(intent);

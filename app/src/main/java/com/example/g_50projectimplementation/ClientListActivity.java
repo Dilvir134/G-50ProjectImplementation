@@ -84,7 +84,7 @@ public class ClientListActivity extends AppCompatActivity {
                     groupsDict.put(cat, new ArrayList<>());
                 }
                 Objects.requireNonNull(groupsDict.get(cat))
-                        .add(new ClientListCard(client.getName(), client.getLocation(),
+                        .add(new ClientListCard(client.getId(), client.getName(), client.getLocation(),
                                 client.getLogoUrl() != null ? Uri.parse(client.getLogoUrl()) : null));
             }
 

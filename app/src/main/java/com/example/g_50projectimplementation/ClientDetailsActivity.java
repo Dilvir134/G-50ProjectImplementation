@@ -24,7 +24,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
         clientContactTextView = findViewById(R.id.clientContactTextView);
 
         // Get the passed clientId
-        int clientId = getIntent().getIntExtra("clientId", -1);
+        int clientId = getIntent().getIntExtra("CLIENT_ID", -1);
 
         if (clientId != -1) {
             db = AppDatabase.getInstance(this);
@@ -35,7 +35,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
                     if (client != null) {
                         clientNameTextView.setText(client.getName());
                         clientLocationTextView.setText(client.getLocation());
-                        //clientContactTextView.setText(client.getContactInfo()); // Assuming a field 'contactInfo'
+                        clientContactTextView.setText(client.getContactName()); // Assuming a field 'contactInfo'
                     }
                 });
             }).start();
