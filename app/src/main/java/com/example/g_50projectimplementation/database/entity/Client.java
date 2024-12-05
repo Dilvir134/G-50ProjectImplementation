@@ -11,6 +11,7 @@ public class Client {
     private String contactName;
     private String contactNumber;
     private String logoUrl;
+    /*private String category;*/
 
     // Constructor
     public Client(String name, String location, String contactName, String contactNumber, String logoUrl) {
@@ -20,6 +21,11 @@ public class Client {
         this.contactNumber = contactNumber;
         this.logoUrl = logoUrl;
     }
+
+    /*public Client(String name, String location, String contactName, String contactNumber, String logoUrl, String category) {
+        this(name, location, contactName, contactNumber, logoUrl);
+        this.category = category;
+    }*/
 
     // Getters and Setters
     public int getId() { return id; }
@@ -34,5 +40,7 @@ public class Client {
     public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
     public String getLogoUrl() { return logoUrl; }
     public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
+/*    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }*/
 }
 
