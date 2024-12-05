@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class ClientGroupedListChildAdapter extends RecyclerView.Adapter<ClientGr
         ClientListCard card = cards.get(position);
         holder.cardTitle.setText(card.getTitle());
         holder.cardDescription.setText(card.getLocation());
+        holder.img.setImageURI(card.getImageUri());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), ClientJobsActivity.class);
@@ -52,11 +54,12 @@ public class ClientGroupedListChildAdapter extends RecyclerView.Adapter<ClientGr
 
     static class ChildViewHolder extends RecyclerView.ViewHolder {
         TextView cardTitle, cardDescription;
-
+        ImageView img;
         public ChildViewHolder(@NonNull View itemView) {
             super(itemView);
             cardTitle = itemView.findViewById(R.id.clientName);
             cardDescription = itemView.findViewById(R.id.clientLocation);
+            img = itemView.findViewById(R.id.clientPicture);
         }
     }
 

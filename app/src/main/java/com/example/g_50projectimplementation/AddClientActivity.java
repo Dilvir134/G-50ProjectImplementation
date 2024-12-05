@@ -56,6 +56,7 @@ public class AddClientActivity extends AppCompatActivity {
     private ImageView imgAddImage;
     private CardView cardAddImg;
 
+    private Uri imageUri = null;
 
     private final ActivityResultLauncher<Intent> contactPickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -92,8 +93,9 @@ public class AddClientActivity extends AppCompatActivity {
 
                         if (copiedImageFile != null) {
                             // Set the copied image URI to ImageView
-                            imgAddImage.setImageURI(Uri.fromFile(copiedImageFile));
-                            Log.i("IMAGE", Uri.fromFile(copiedImageFile).toString());
+                            imageUri = Uri.fromFile(copiedImageFile);
+                            imgAddImage.setImageURI(imageUri);
+                            Log.i("IMAGE", imageUri.toString());
                         } else {
                             Log.e("AddClientActivity", "Failed to copy image");
                             return;
@@ -163,7 +165,7 @@ public class AddClientActivity extends AppCompatActivity {
                 return;
             }
 
-            Client newClient = new Client(name, location, contactName, contactNumber, null);
+            Client newClient = new Client(name, location, contactName, contactNumber, imageUri != null ? imageUri.toString() : null);
             new Thread(() -> db.clientDao().insert(newClient)).start(); // Database operation on a background thread
 
             finish(); // Return to the previous activity

@@ -1,6 +1,7 @@
 package com.example.g_50projectimplementation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -78,7 +79,8 @@ public class ClientListActivity extends AppCompatActivity {
             List<Client> finalClients = clients;
 
             List<ClientListCard> cards1 = clients.stream()
-                    .map(x -> new ClientListCard(x.getName(), x.getLocation()))
+                    .map(x -> new ClientListCard(x.getName(), x.getLocation(),
+                            x.getLogoUrl() != null ? Uri.parse(x.getLogoUrl()) : null))
                     .collect(Collectors.toList());
             List<ClientListCardGroup> groups = new ArrayList<>();
             groups.add(new ClientListCardGroup("Ungrouped", cards1));

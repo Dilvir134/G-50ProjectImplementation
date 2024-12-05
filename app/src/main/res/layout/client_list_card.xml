@@ -31,8 +31,9 @@
             android:id="@+id/clientPicture"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@color/material_dynamic_tertiary95"
             android:contentDescription="TODO"
-            android:background="@color/material_dynamic_tertiary95" />
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
