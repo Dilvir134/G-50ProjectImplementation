@@ -12,6 +12,7 @@
     <color name="dark_purple">#4B0082</color>
     <color name="gray_light">#D3D3D3</color>
     <color name="purple_500">#6200EE</color>
+    <color name="error">@color/design_default_color_error</color>
 
 
 
