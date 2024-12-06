@@ -123,6 +123,10 @@ public class AddClientActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
+        //Edit Mode
+        int clientId = getIntent().getIntExtra("CLIENT_ID", -1);
+        boolean isEditMode = clientId != -1;
+
         // Contact
         contactNameField = findViewById(R.id.contactName);
         contactPhoneField = findViewById(R.id.contactPhone);
@@ -155,7 +159,7 @@ public class AddClientActivity extends AppCompatActivity {
                     MaterialButton btn = (MaterialButton) v;
                     if (btn.getStrokeWidth() != 0)
                         return;
-                    btn.setStrokeWidth(categoryStrokeWidth);
+                   /* btn.setStrokeWidth(categoryStrokeWidth);*/
                     selectedCategory = btn.getText().toString();
                     resetAllOtherCategories();
                 }
@@ -193,10 +197,27 @@ public class AddClientActivity extends AppCompatActivity {
                 return;
             }
 
-            Client newClient = new Client(name, location, contactName, contactNumber,
-                    imageUri != null ? imageUri.toString() : null, selectedCategory);
-            new Thread(() -> db.clientDao().insert(newClient)).start(); // Database operation on a background thread
+            if(!isEditMode) { // Add
+                Client newClient = new Client(name, location, contactName, contactNumber,
+                        imageUri != null ? imageUri.toString() : null, selectedCategory);
+                new Thread(() -> db.clientDao().insert(newClient)).start();
+            } else { // Update
+                new Thread(() -> {
+                    Client client = db.clientDao().getClientById(clientId);
+                    if(client == null) {
+                        Log.e("AddClient", "EDITMODE: Client is null!");
+                        return;
+                    }
+                    client.setName(name);
+                    client.setLocation(location);
+                    client.setContactName(contactName);
+                    client.setContactNumber(contactNumber);
+                    client.setLogoUrl(imageUri != null ? imageUri.toString() : null);
+                    client.setCategory(selectedCategory);
+                    db.clientDao().update(client);
+                }).start();
 
+            }
             finish(); // Return to the previous activity
         });
 
@@ -204,6 +225,27 @@ public class AddClientActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(l -> {
             finish(); // Go back
         });
+
+        // Edit mode init with data
+        new Thread(() -> {
+            if(clientId == -1)
+                return;
+            Client client = db.clientDao().getClientById(clientId);
+            runOnUiThread(() -> {
+                if(client.getLogoUrl() != null) {
+                    imageUri = Uri.parse(client.getLogoUrl());
+                    imgAddImage.setImageURI(imageUri);
+                }
+                companyNameInput.setText(client.getName());
+                addressInput.setText(client.getLocation());
+                contactNameField.setText(client.getContactName());
+                contactPhoneField.setText(client.getContactNumber());
+                if(client.getCategory() != null) {
+                    selectedCategory = client.getCategory();
+                    resetAllOtherCategories();
+                }
+            });
+        }).start();
     }
 
     private void resetAllOtherCategories() {
@@ -213,6 +255,8 @@ public class AddClientActivity extends AppCompatActivity {
                 MaterialButton btn = (MaterialButton)child;
                 if(!btn.getText().toString().equals(selectedCategory)) {
                     btn.setStrokeWidth(0);
+                } else {
+                    btn.setStrokeWidth(categoryStrokeWidth);
                 }
             }
         }
