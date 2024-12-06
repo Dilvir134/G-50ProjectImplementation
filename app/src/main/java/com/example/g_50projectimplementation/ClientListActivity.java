@@ -1,6 +1,7 @@
 package com.example.g_50projectimplementation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,16 +15,22 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.g_50projectimplementation.adapters.ClientAdapter;
 import com.example.g_50projectimplementation.adapters.ClientGroupedListParentAdapter;
 import com.example.g_50projectimplementation.adapters.model.ClientListCard;
 import com.example.g_50projectimplementation.adapters.model.ClientListCardGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.g_50projectimplementation.database.AppDatabase;
+import com.example.g_50projectimplementation.database.entity.Client;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ClientListActivity extends AppCompatActivity {
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,33 +50,57 @@ public class ClientListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        List<ClientListCard> cards1 = new ArrayList<>();
-        cards1.add(new ClientListCard("Casino Niagara", "Niagrara Falls, ON"));
-        cards1.add(new ClientListCard("Caesors Windsor", "Windosor, ON"));
+        db = AppDatabase.getInstance(this);
 
-        List<ClientListCard> cards2 = new ArrayList<>();
-        cards2.add(new ClientListCard("Hard Rock", "Miami, Fl"));
-        cards2.add(new ClientListCard("Hilton Hotel", "Toronto, ON"));
+        refreshData();
 
-        List<ClientListCard> cards3 = new ArrayList<>();
-        cards3.add(new ClientListCard("Wayne's Apartment", "Richmondhill, ON"));
-        cards3.add(new ClientListCard("Jonny's Palace", "Toronto, ON"));
-
-        List<ClientListCardGroup> groups = new ArrayList<>();
-        groups.add(new ClientListCardGroup("Casinos", cards1));
-        groups.add(new ClientListCardGroup("Hotels", cards2));
-        groups.add(new ClientListCardGroup("AirBnBs", cards3));
-
-        // Set up RecyclerView
-        RecyclerView parentRecyclerView = findViewById(R.id.parentRecyclerView);
-        parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        parentRecyclerView.setAdapter(new ClientGroupedListParentAdapter(groups));
-
-        View fab = findViewById(R.id.extendedFab);
-        fab.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddClientActivity.class);
+        // Add Client Button - Navigates to AddClientActivity
+        ExtendedFloatingActionButton addClientButton = findViewById(R.id.extendedFab);
+        addClientButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ClientListActivity.this, AddClientActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData();
+    }
+
+    private void refreshData() {
+        RecyclerView recyclerView = findViewById(R.id.parentRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new Thread(() -> {
+            List<Client> clients = db.clientDao().getAllClients(); // Fetch data from DAO
+            if (clients == null) {
+                clients = new ArrayList<>(); // Ensure a non-null list for the adapter
+            }
+
+            HashMap<String, List<ClientListCard>> groupsDict = new HashMap<>();
+            for (Client client: clients ) {
+                String cat = client.getCategory() != null ? client.getCategory() : "Ungrouped";
+                if(!groupsDict.containsKey(cat)) {
+                    groupsDict.put(cat, new ArrayList<>());
+                }
+                Objects.requireNonNull(groupsDict.get(cat))
+                        .add(new ClientListCard(client.getId(), client.getName(), client.getLocation(),
+                                client.getLogoUrl() != null ? Uri.parse(client.getLogoUrl()) : null));
+            }
+
+            List<ClientListCardGroup> groups = new ArrayList<>();
+            boolean hasSomething = false;
+            for (String key: groupsDict.keySet() ) {
+                groups.add(new ClientListCardGroup(key, groupsDict.get(key)));
+                hasSomething = true;
+            }
+            if(!hasSomething) {
+                groups.add(new ClientListCardGroup("No Clients yet.", new ArrayList<>()));
+            }
+
+            runOnUiThread(() -> recyclerView.setAdapter(new ClientGroupedListParentAdapter(groups)));
+
+        }).start();
     }
 
     @Override
