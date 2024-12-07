@@ -244,6 +244,7 @@ public class AddClientActivity extends AppCompatActivity {
                     selectedCategory = client.getCategory();
                     resetAllOtherCategories();
                 }
+                imgAddImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
             });
         }).start();
     }
