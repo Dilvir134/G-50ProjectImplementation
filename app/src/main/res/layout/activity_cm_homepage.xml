@@ -31,33 +31,36 @@
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:weightSum="10"
-        android:layout_marginBottom="150dp">
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <Button
             android:id="@+id/signInButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sign in"
+            android:layout_height="66dp"
+            android:layout_marginBottom="18dp"
             android:backgroundTint="@color/on_primary"
-            android:textColor="@color/white"
-            android:layout_marginBottom="35dp"
-            android:onClick="goToSignInPage"/>
+            android:onClick="goToSignInPage"
+            android:text="Sign in"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/singInGoogleButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icons8_google"
-            android:text="Sign in with Google"
+            android:layout_height="66dp"
             android:backgroundTint="@color/primary"
-            android:textColor="@color/on_primary"
-            android:onClick="goToGoogle"/>
+            android:drawableLeft="@drawable/icons8_google"
+            android:onClick="goToGoogle"
+            android:text="Sign in with Google"
+            android:textColor="@color/on_primary" />
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="100" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,5 +82,11 @@
             android:textColor="@color/blue"
             android:onClick="goToSignUpPage"/>
     </LinearLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="40" />
 
 </LinearLayout>

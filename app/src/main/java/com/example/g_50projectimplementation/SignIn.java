@@ -1,8 +1,11 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ public class SignIn extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,34 @@ public class SignIn extends AppCompatActivity {
 
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
+        login = findViewById(R.id.loginButton);
+
+        SharedPreferences sharedPref = getSharedPreferences(
+        "com.gbc.g50.EMAILPASS", Context.MODE_PRIVATE);
+
+        login.setOnClickListener(v -> {
+            String userEmail = email.getText().toString();
+            String userPass = password.getText().toString();
+            if(userPass == null || userPass.isBlank()) {
+                Toast.makeText(this, "Please enter your password", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(userEmail == null || userEmail.isBlank()) {
+                Toast.makeText(this, "Please enter your email", Toast.LENGTH_LONG).show();
+                return;
+            }
+            String savedPass = sharedPref.getString(userEmail, "");
+            if(savedPass.isEmpty()) {
+                Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(savedPass.trim().equals(userPass.trim())) {
+                // Allow login
+                goToCompanyPage();
+                return;
+            }
+            Toast.makeText(this, "Inavlid Password", Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override

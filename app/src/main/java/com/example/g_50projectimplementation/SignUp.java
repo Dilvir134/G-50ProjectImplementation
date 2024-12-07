@@ -1,6 +1,8 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -56,6 +58,12 @@ public class SignUp extends AppCompatActivity {
     public void attemptSignUp(View view) {
         if(validateEmail(email.getText().toString())) {
             if(validateMatchingPasswords(password.getText().toString(), confirmPassword.getText().toString())) {
+
+                SharedPreferences sharedPref = getSharedPreferences(
+                        "com.gbc.g50.EMAILPASS", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(email.getText().toString().trim(), password.getText().toString().trim());
+                editor.apply();
                 goToSignInPage();
                 return;
             }
@@ -73,7 +81,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private boolean validateMatchingPasswords(String password, String confirmPassword) {
-        return password.equals(confirmPassword);
+        return password.equals(confirmPassword) && !password.isBlank();
     }
 
     private boolean validateEmail(String email) {
