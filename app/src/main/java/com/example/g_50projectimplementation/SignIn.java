@@ -67,7 +67,7 @@ public class SignIn extends AppCompatActivity {
             }
             if(savedPass.trim().equals(userPass.trim())) {
                 // Allow login
-                goToCompanyPage();
+                login(userPhone);
                 return;
             }
             Toast.makeText(this, "Invalid Password", Toast.LENGTH_LONG).show();
@@ -98,7 +98,30 @@ public class SignIn extends AppCompatActivity {
        // toast.show();
     }*/
 
-    public void goToCompanyPage() {
+    public void login(String phone) {
+
+        SharedPreferences currentUserPref = getSharedPreferences("com.gbc.g50.CurrentUser", Context.MODE_PRIVATE);
+        SharedPreferences fullNameDb = getSharedPreferences("com.gbc.g50.PHONENAME", Context.MODE_PRIVATE);
+        SharedPreferences displayNameDb = getSharedPreferences("com.gbc.g50.PHONEDISPLAY", Context.MODE_PRIVATE);
+
+        String fullName = fullNameDb.getString(phone, "");
+        if(fullName.isBlank()) {
+            throw new IllegalStateException("Full Name not set for phone "+  phone);
+        }
+
+
+        String displayName = displayNameDb.getString(phone, "");
+        if(fullName.isBlank()) {
+            throw new IllegalStateException("Display Name not set for phone "+  phone);
+        }
+
+        SharedPreferences.Editor editor = currentUserPref.edit();
+        editor.putString("Phone", phone);
+        editor.putString("FullName", fullName);
+        editor.putString("DisplayName", displayName);
+        editor.apply();
+
+
         Intent intent = new Intent(this, HomeManager.class);
         startActivity(intent);
     }
