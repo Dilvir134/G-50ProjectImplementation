@@ -18,14 +18,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.g_50projectimplementation.util.Constants;
-
 import java.util.Objects;
 
 public class SignUp extends AppCompatActivity {
@@ -96,7 +88,14 @@ public class SignUp extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(phoneInput.getText().toString().trim(), passwordInput.getText().toString().trim());
                 editor.apply();
-                goToSignInPage();
+
+                SharedPreferences currentUserPref = getSharedPreferences("com.gbc.g50.CurrentUser", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = currentUserPref.edit();
+                editor2.putString("Phone", phoneInput.getText().toString().trim());
+                editor2.apply();
+
+                goToNextPage();
+
                 return;
             }
             Toast toast = Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT);
@@ -106,10 +105,11 @@ public class SignUp extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Invalid Phone Number", Toast.LENGTH_SHORT);
         toast.show();
 
+
     }
 
-    private void goToSignInPage() {
-        Intent intent = new Intent(SignUp.this, SignIn.class);
+    private void goToNextPage() {
+        Intent intent = new Intent(SignUp.this, Signup2Activity.class);
         startActivity(intent);
     }
 
