@@ -69,6 +69,12 @@ public class HomeManager extends AppCompatActivity {
             startActivity(intent);
         });
 
+        ImageButton resBtn = findViewById(R.id.btn_team);
+        resBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TeamResourcesActivity.class);
+            startActivity(intent);
+        });
+
         namelabel = findViewById(R.id.label_userDisplayName);
         SharedPreferences currentUserPref = getSharedPreferences("com.gbc.g50.CurrentUser", Context.MODE_PRIVATE);
         String displayName = currentUserPref.getString("DisplayName", "");

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TeamResourcesActivity"
+    android:background="@color/background">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/on_primary"
+        android:theme="@style/ToolbarTheme"/>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_staff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_text">
+
+        <ImageButton
+            android:id="@+id/btn_staff"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/rounded_small_button"
+            android:backgroundTint="#BCE2AF"
+            android:contentDescription="Staff"
+            android:elevation="4dp"
+            android:outlineProvider="background"
+            android:src="@drawable/staff_icon" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/label_staff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Staff"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+<!--
+
+    <LinearLayout
+        android:id="@+id/linearLayout_managers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_text">
+
+        <ImageButton
+            android:id="@+id/btn_managers"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_small_button"
+            android:backgroundTint="#A6D4F4"
+            android:contentDescription="Staff"
+            android:elevation="4dp"
+            android:outlineProvider="background"
+            android:src="@drawable/staff_icon" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/label_managers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Managers"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+-->
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout_resources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_text">
+
+        <ImageButton
+            android:id="@+id/btn_resources"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/rounded_small_button"
+            android:backgroundTint="#F4D55F"
+            android:contentDescription="Staff"
+            android:elevation="4dp"
+            android:outlineProvider="background"
+            android:src="@drawable/resources_icon" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/label_resources"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Resources"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100"/>
+
+</LinearLayout>
