@@ -20,8 +20,8 @@ import java.util.Objects;
 
 public class SignIn extends AppCompatActivity {
 
-    private EditText email;
-    private EditText password;
+    private EditText phoneInput;
+    private EditText passwordInput;
     private Button login;
 
     @Override
@@ -42,27 +42,27 @@ public class SignIn extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        email = findViewById(R.id.emailEditText);
-        password = findViewById(R.id.passwordEditText);
+        phoneInput = findViewById(R.id.inputPhone);
+        passwordInput = findViewById(R.id.inputPassword);
         login = findViewById(R.id.loginButton);
 
         SharedPreferences sharedPref = getSharedPreferences(
-        "com.gbc.g50.EMAILPASS", Context.MODE_PRIVATE);
+        "com.gbc.g50.PHONEPASS", Context.MODE_PRIVATE);
 
         login.setOnClickListener(v -> {
-            String userEmail = email.getText().toString();
-            String userPass = password.getText().toString();
+            String userPhone = phoneInput.getText().toString();
+            String userPass = passwordInput.getText().toString();
             if(userPass == null || userPass.isBlank()) {
                 Toast.makeText(this, "Please enter your password", Toast.LENGTH_LONG).show();
                 return;
             }
-            if(userEmail == null || userEmail.isBlank()) {
-                Toast.makeText(this, "Please enter your email", Toast.LENGTH_LONG).show();
+            if(userPhone == null || userPhone.isBlank()) {
+                Toast.makeText(this, "Please enter your phone number", Toast.LENGTH_LONG).show();
                 return;
             }
-            String savedPass = sharedPref.getString(userEmail, "");
+            String savedPass = sharedPref.getString(userPhone, "");
             if(savedPass.isEmpty()) {
-                Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Invalid Phone Number", Toast.LENGTH_LONG).show();
                 return;
             }
             if(savedPass.trim().equals(userPass.trim())) {
@@ -70,7 +70,7 @@ public class SignIn extends AppCompatActivity {
                 goToCompanyPage();
                 return;
             }
-            Toast.makeText(this, "Inavlid Password", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid Password", Toast.LENGTH_LONG).show();
         });
     }
 
@@ -84,10 +84,10 @@ public class SignIn extends AppCompatActivity {
         Intent intent = new Intent(SignIn.this, SignUp.class);
         startActivity(intent);
     }
-
+/*
     public void signIn(View view) {
-        if (email.getText().toString().equals("admin@admin.com")) {
-            if (password.getText().toString().equals("password@123")) {
+        if (phoneInput.getText().toString().equals("admin@admin.com")) {
+            if (passwordInput.getText().toString().equals("password@123")) {
                 goToCompanyPage();
             }
         }
@@ -96,7 +96,7 @@ public class SignIn extends AppCompatActivity {
         }
         //Toast toast = Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT);
        // toast.show();
-    }
+    }*/
 
     public void goToCompanyPage() {
         Intent intent = new Intent(this, HomeManager.class);

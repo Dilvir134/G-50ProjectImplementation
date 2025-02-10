@@ -18,13 +18,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.g_50projectimplementation.util.Constants;
+
 import java.util.Objects;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText email;
-    private EditText password;
-    private EditText confirmPassword;
+    private EditText phoneInput;
+    private EditText passwordInput;
+    private EditText confirmPasswordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +52,9 @@ public class SignUp extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        email = findViewById(R.id.emailEditText);
-        password = findViewById(R.id.passwordEditText);
-        confirmPassword = findViewById(R.id.confirmPasswordEditText);
+        phoneInput = findViewById(R.id.inputPhone);
+        passwordInput = findViewById(R.id.inputPassword);
+        confirmPasswordInput = findViewById(R.id.inputConfirmPassword);
     }
 
     @Override
@@ -56,13 +64,37 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void attemptSignUp(View view) {
-        if(validateEmail(email.getText().toString())) {
-            if(validateMatchingPasswords(password.getText().toString(), confirmPassword.getText().toString())) {
+
+        /*
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://api.github.com/users/mralexgray/repos";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        String r = ("Response is: " + response.substring(0,500));
+                        Toast toast = Toast.makeText(SignUp.this, r, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //phoneInput.setText(error.getMessage());
+                Toast toast = Toast.makeText(SignUp.this, "Didnt work" + error.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        queue.add(stringRequest);
+        */
+
+        if(validatePhone(phoneInput.getText().toString())) {
+            if(validateMatchingPasswords(passwordInput.getText().toString(), confirmPasswordInput.getText().toString())) {
 
                 SharedPreferences sharedPref = getSharedPreferences(
-                        "com.gbc.g50.EMAILPASS", Context.MODE_PRIVATE);
+                        "com.gbc.g50.PHONEPASS", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(email.getText().toString().trim(), password.getText().toString().trim());
+                editor.putString(phoneInput.getText().toString().trim(), passwordInput.getText().toString().trim());
                 editor.apply();
                 goToSignInPage();
                 return;
@@ -71,8 +103,9 @@ public class SignUp extends AppCompatActivity {
             toast.show();
             return;
         }
-        Toast toast = Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, "Invalid Phone Number", Toast.LENGTH_SHORT);
         toast.show();
+
     }
 
     private void goToSignInPage() {
@@ -84,8 +117,8 @@ public class SignUp extends AppCompatActivity {
         return password.equals(confirmPassword) && !password.isBlank();
     }
 
-    private boolean validateEmail(String email) {
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    private boolean validatePhone(String phoneNumber) {
+        return (!TextUtils.isEmpty(phoneNumber) && Patterns.PHONE.matcher(phoneNumber).matches());
     }
 
     public void goToGoogle(View view) {
