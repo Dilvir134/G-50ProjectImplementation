@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.g_50projectimplementation.ClientDetailsActivity;
 import com.example.g_50projectimplementation.R;
+import com.example.g_50projectimplementation.StaffDetailsActivity;
 import com.example.g_50projectimplementation.adapters.model.ClientListCard;
 import com.example.g_50projectimplementation.adapters.model.StaffListCard;
 
@@ -40,8 +41,7 @@ public class StaffGroupedListChildAdapter extends RecyclerView.Adapter<StaffGrou
         holder.img.setImageURI(card.getImageUri());
 
         holder.itemView.setOnClickListener(v -> {
-            //TODO: Navigate to StaffDetailsActivity
-            Intent intent = new Intent(holder.itemView.getContext(), ClientDetailsActivity.class);
+            Intent intent = new Intent(holder.itemView.getContext(), StaffDetailsActivity.class);
             intent.putExtra("STAFF_ID", card.getId());
             intent.putExtra("STAFF_NAME", card.getTitle());
             intent.putExtra("STAFF_POSITION", card.getPosition());
