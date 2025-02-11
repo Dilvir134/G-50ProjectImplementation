@@ -1,6 +1,9 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Objects;
 
 public class TeamResourcesActivity extends AppCompatActivity {
+
+    private ImageButton staffButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,12 @@ public class TeamResourcesActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        staffButton = findViewById(R.id.btn_staff);
+
+        staffButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TeamResourcesActivity.this, StaffListActivity.class);
+            startActivity(intent);
+        });
     }
 
 
