@@ -142,9 +142,24 @@ public class AddStaffActivity extends AppCompatActivity {
                 return;
             }
 
-            Staff newStaff = new Staff(employeeName, employeeRole, employeePhone,
-                    imageUri != null ? imageUri.toString() : null);
-            new Thread(() -> db.staffDao().insert(newStaff)).start();
+            if(!isEditMode) {
+                Staff newStaff = new Staff(employeeName, employeeRole, employeePhone,
+                        imageUri != null ? imageUri.toString() : null);
+                new Thread(() -> db.staffDao().insert(newStaff)).start();
+            } else {
+                new Thread(() -> {
+                    Staff staff = db.staffDao().getStaffById(staffId);
+                    if (staff == null) {
+                        Log.e("AddStaffActivity", "Staff not found in DB");
+                        return;
+                    }
+                    staff.setName(employeeName);
+                    staff.setPosition(employeeRole);
+                    staff.setPhone(employeePhone);
+                    staff.setImageUrl(imageUri != null ? imageUri.toString() : null);
+                    db.staffDao().update(staff);
+                }).start();
+            }
 
             finish(); // Return to the previous activity
         });

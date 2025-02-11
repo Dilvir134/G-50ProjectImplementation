@@ -104,4 +104,10 @@ public class StaffListActivity extends AppCompatActivity {
         finish();
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData();
+    }
 }

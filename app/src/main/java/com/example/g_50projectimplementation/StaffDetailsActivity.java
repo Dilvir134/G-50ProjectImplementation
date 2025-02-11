@@ -7,8 +7,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -16,7 +18,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.g_50projectimplementation.database.AppDatabase;
+import com.example.g_50projectimplementation.database.entity.Client;
 import com.example.g_50projectimplementation.database.entity.Staff;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -81,6 +85,38 @@ public class StaffDetailsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnDelete.setOnClickListener(l -> {
+            AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
+                    .setTitle("Confirm Delete")
+                    .setPositiveButton("Delete", (dialog1, which) -> {
+                        new Thread(() -> {
+                            Staff staff = db.staffDao().getStaffById(staffId);
+                            Log.d("StaffDetails", "Deleting Staff " + staffId);
+                            if(staff != null) {
+                                db.staffDao().delete(staff);
+                                runOnUiThread(this::finish);
+                            } else {
+                                Log.e("StaffDetails", "Failed to delete staff. Staff is null");
+                                runOnUiThread( () -> {
+                                    Toast.makeText(this, "Failed to delete staff. Staff is null", Toast.LENGTH_LONG).show();
+                                });
+                            }
+                        }).start();
+                    })
+                    .setMessage("This action is permanent and cannot be reversed.")
+                    .setNegativeButton("Cancel", (dialog1, which) -> {
+                        dialog1.dismiss();
+                    })
+                    .create();
+            dialog.setOnShowListener(alertDialog -> {
+                Button positiveButton = ((AlertDialog)alertDialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setTextColor(getColor(R.color.error));
+            });
+
+            dialog.show();
+
+        });
+
         btnEmergency.setOnClickListener(l -> {
             String phone = emergencyPhone;
             Log.d("PHONE", phone);
@@ -95,6 +131,17 @@ public class StaffDetailsActivity extends AppCompatActivity {
         refreshData(staffId);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData(staffId);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
     private void refreshData(int staffId) {
 
         new Thread(() -> {
@@ -102,25 +149,15 @@ public class StaffDetailsActivity extends AppCompatActivity {
             if(staff == null) {
                 throw new IllegalArgumentException("Staff not found in database");
             }
-            staffNameTextView.setText(staff.getName());
-            staffPositionTextView.setText(staff.getPosition());
-            contactPhone.setText(staff.getPhone());
-            emergencyPhone = staff.getPhone();
-            if(staff.getImageUrl() != null) {
-                staffImg.setImageURI(Uri.parse(staff.getImageUrl()));
-            }
-        }).start();/*
-
-        Staff staff = db.staffDao().getStaffById(staffId);
-        if(staff == null) {
-            throw new IllegalArgumentException("Staff not found in database");
-        }
-        staffNameTextView.setText(staff.getName());
-        staffPositionTextView.setText(staff.getPosition());
-        contactPhone.setText(staff.getPhone());
-        emergencyPhone = staff.getPhone();
-        if(staff.getImageUrl() != null) {
-            staffImg.setImageURI(Uri.parse(staff.getImageUrl()));
-        }*/
+            runOnUiThread(() -> {
+                staffNameTextView.setText(staff.getName());
+                staffPositionTextView.setText(staff.getPosition());
+                contactPhone.setText(staff.getPhone());
+                emergencyPhone = staff.getPhone();
+                if(staff.getImageUrl() != null) {
+                    staffImg.setImageURI(Uri.parse(staff.getImageUrl()));
+                }
+            });
+        }).start();
     }
 }
