@@ -144,7 +144,7 @@ public class AddStaffActivity extends AppCompatActivity {
 
             if(!isEditMode) {
                 Staff newStaff = new Staff(employeeName, employeeRole, employeePhone,
-                        imageUri != null ? imageUri.toString() : null);
+                        imageUri != null ? imageUri.toString() : null, emergencyContactName, emergencyContactPhone);
                 new Thread(() -> db.staffDao().insert(newStaff)).start();
             } else {
                 new Thread(() -> {
@@ -157,6 +157,8 @@ public class AddStaffActivity extends AppCompatActivity {
                     staff.setPosition(employeeRole);
                     staff.setPhone(employeePhone);
                     staff.setImageUrl(imageUri != null ? imageUri.toString() : null);
+                    staff.setEmergencyContactName(emergencyContactName);
+                    staff.setEmergencyPhone(emergencyContactPhone);
                     db.staffDao().update(staff);
                 }).start();
             }
@@ -182,8 +184,8 @@ public class AddStaffActivity extends AppCompatActivity {
                 }
                 employeeNameInput.setText(staff.getName());
                 employeePhoneInput.setText(staff.getPhone());
-                emergencyContactNameInput.setText(staff.getName()); //TODO: Change to emergency contact
-                emergencyContactPhoneInput.setText(staff.getPhone());
+                emergencyContactNameInput.setText(staff.getEmergencyContactName());
+                emergencyContactPhoneInput.setText(staff.getEmergencyPhone());
                 employeeRoleDropdown.setText(staff.getPosition(), false);
 
             });

@@ -13,12 +13,16 @@ public class Staff {
     private String position;
     private String phone;
     private String imageUrl;
+    private String emergencyPhone;
+    private String emergencyContactName;
 
-    public Staff(String name, String position, String phone, String imageUrl) {
+    public Staff(String name, String position, String phone, String imageUrl, String emergencyContactName, String emergencyPhone) {
         this.name = name;
         this.position = position;
         this.phone = phone;
         this.imageUrl = imageUrl;
+        this.emergencyContactName = emergencyContactName;
+        this.emergencyPhone = emergencyPhone;
     }
 
     public int getId() {
@@ -41,6 +45,14 @@ public class Staff {
         return imageUrl;
     }
 
+    public String getEmergencyPhone() {
+        return emergencyPhone;
+    }
+
+    public String getEmergencyContactName() {
+        return emergencyContactName;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -59,5 +71,13 @@ public class Staff {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public void setEmergencyPhone(String emergencyPhone) {
+        this.emergencyPhone = emergencyPhone;
+    }
+
+    public void setEmergencyContactName(String emergencyContactName) {
+        this.emergencyContactName = emergencyContactName;
     }
 }

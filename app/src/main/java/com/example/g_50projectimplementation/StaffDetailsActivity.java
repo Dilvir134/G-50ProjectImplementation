@@ -79,6 +79,16 @@ public class StaffDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnEmergency.setOnClickListener(l -> {
+            String phone = emergencyPhone;
+            Log.d("PHONE", phone);
+            if(!phone.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + phone));
+                startActivity(intent);
+            }
+        });
+
         btnEdit.setOnClickListener(l -> {
             Intent intent = new Intent(StaffDetailsActivity.this, AddStaffActivity.class);
             intent.putExtra("STAFF_ID", staffId);
@@ -153,7 +163,7 @@ public class StaffDetailsActivity extends AppCompatActivity {
                 staffNameTextView.setText(staff.getName());
                 staffPositionTextView.setText(staff.getPosition());
                 contactPhone.setText(staff.getPhone());
-                emergencyPhone = staff.getPhone();
+                emergencyPhone = staff.getEmergencyPhone();
                 if(staff.getImageUrl() != null) {
                     staffImg.setImageURI(Uri.parse(staff.getImageUrl()));
                 }
