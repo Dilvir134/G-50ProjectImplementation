@@ -75,6 +75,12 @@ public class StaffDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnEdit.setOnClickListener(l -> {
+            Intent intent = new Intent(StaffDetailsActivity.this, AddStaffActivity.class);
+            intent.putExtra("STAFF_ID", staffId);
+            startActivity(intent);
+        });
+
         btnEmergency.setOnClickListener(l -> {
             String phone = emergencyPhone;
             Log.d("PHONE", phone);

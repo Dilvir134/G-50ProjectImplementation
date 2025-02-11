@@ -50,6 +50,9 @@ public class AddStaffActivity extends AppCompatActivity {
 
     private Uri imageUri = null;
 
+    private boolean isEditMode = false;
+    private int staffId = -1;
+
     private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -85,6 +88,10 @@ public class AddStaffActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        staffId = getIntent().getIntExtra("STAFF_ID", -1);
+        isEditMode = staffId != -1;
 
         Util.fixStatusBarColorLight(getWindow(), this);
 
@@ -135,7 +142,6 @@ public class AddStaffActivity extends AppCompatActivity {
                 return;
             }
 
-            //TODO: Check edit mode
             Staff newStaff = new Staff(employeeName, employeeRole, employeePhone,
                     imageUri != null ? imageUri.toString() : null);
             new Thread(() -> db.staffDao().insert(newStaff)).start();
@@ -147,6 +153,26 @@ public class AddStaffActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(l -> {
             finish(); // Go back
         });
+
+        // Edit mode init with data
+        new Thread(() -> {
+            if(!isEditMode)
+                return;
+            Staff staff = db.staffDao().getStaffById(staffId);
+            runOnUiThread(() -> {
+                if(staff.getImageUrl() != null) {
+                    imageUri = Uri.parse(staff.getImageUrl());
+                    imgAddImage.setImageURI(imageUri);
+                    imgAddImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }
+                employeeNameInput.setText(staff.getName());
+                employeePhoneInput.setText(staff.getPhone());
+                emergencyContactNameInput.setText(staff.getName()); //TODO: Change to emergency contact
+                emergencyContactPhoneInput.setText(staff.getPhone());
+                employeeRoleDropdown.setText(staff.getPosition(), false);
+
+            });
+        }).start();
 
     }
 
