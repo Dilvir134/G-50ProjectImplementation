@@ -1,6 +1,8 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -33,6 +35,19 @@ public class CMHomePage extends AppCompatActivity {
         });
 
         Util.fixStatusBarColorLight(getWindow(), this);
+
+        SharedPreferences currentUserPref = getSharedPreferences("com.gbc.g50.CurrentUser", Context.MODE_PRIVATE);
+
+        String phone = currentUserPref.getString("Phone", "");
+        String displayName = currentUserPref.getString("DisplayName", "");
+        String fullName = currentUserPref.getString("FullName", "");
+
+        if(!phone.isBlank() && !displayName.isBlank() && !fullName.isBlank()){
+            Log.d("CMHomePage", "User is already logged in");
+            Intent intent = new Intent(CMHomePage.this, HomeManager.class);
+            startActivity(intent);
+
+        }
     }
 
     public void goToSignInPage(View view) {

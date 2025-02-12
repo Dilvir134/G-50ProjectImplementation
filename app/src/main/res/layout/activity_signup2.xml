@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn"
     android:orientation="vertical"
+    tools:context=".Signup2Activity"
     android:background="@color/background">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,6 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="2" />
 
+<!--    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="One last thing..."
+        android:textAlignment="center"
+        />-->
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="200dp"
@@ -36,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2" />
 
+
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -43,47 +52,46 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phoneTextField"
+            android:id="@+id/fullNameTextField"
             style="?attr/textInputOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="4dp"
-            android:hint="Phone">
+            android:hint="Full Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputPhone"
-                android:inputType="phone"
+                android:id="@+id/inputfullName"
+                android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextField"
+            android:id="@+id/displayNameTextField"
             style="?attr/textInputOutlinedStyle"
-            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="4dp"
-            android:hint="Password">
+            android:hint="Display Name (optional)">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputPassword"
-                android:inputType="textPassword"
+                android:id="@+id/inputDisplayName"
+                android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/actionBtn"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_height="63dp"
             android:backgroundTint="@color/on_primary"
-            android:text="Sign In"
+            android:text="Let's Go"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -92,32 +100,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Don't have an account? "
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/signUpTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="goToSignUpPage"
-            android:text="@string/sign_up"
-            android:textColor="@color/blue" />
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
 </LinearLayout>

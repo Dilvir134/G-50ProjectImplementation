@@ -235,6 +235,7 @@ public class AddClientActivity extends AppCompatActivity {
                 if(client.getLogoUrl() != null) {
                     imageUri = Uri.parse(client.getLogoUrl());
                     imgAddImage.setImageURI(imageUri);
+                    imgAddImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 }
                 companyNameInput.setText(client.getName());
                 addressInput.setText(client.getLocation());
@@ -244,7 +245,6 @@ public class AddClientActivity extends AppCompatActivity {
                     selectedCategory = client.getCategory();
                     resetAllOtherCategories();
                 }
-                imgAddImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             });
         }).start();

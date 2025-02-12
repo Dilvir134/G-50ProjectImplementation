@@ -1,15 +1,23 @@
 package com.example.g_50projectimplementation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +31,8 @@ public class HomeManager extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeManagerBinding binding;
+
+    private TextView namelabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,29 @@ public class HomeManager extends AppCompatActivity {
             Intent intent = new Intent(this, ClientListActivity.class);
             startActivity(intent);
         });
+
+        ImageButton resBtn = findViewById(R.id.btn_team);
+        resBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TeamResourcesActivity.class);
+            startActivity(intent);
+        });
+
+        namelabel = findViewById(R.id.label_userDisplayName);
+        SharedPreferences currentUserPref = getSharedPreferences("com.gbc.g50.CurrentUser", Context.MODE_PRIVATE);
+        String displayName = currentUserPref.getString("DisplayName", "");
+        if(displayName.isBlank()) {
+            Toast.makeText(this, "Please login or signup to continue", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, CMHomePage.class);
+            startActivity(intent);
+        }
+        namelabel.setText(displayName);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Do nothing to block the back button
+            }
+        });
     }
 
     @Override
@@ -70,8 +103,18 @@ public class HomeManager extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home_manager);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_account) {  // Replace with actual menu item ID
+            Intent intent = new Intent(this, AccountActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

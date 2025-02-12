@@ -28,6 +28,11 @@
         android:src="@mipmap/cm_logo_foreground"
         android:layout_marginVertical="50dp"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="100" />
+
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -42,7 +47,7 @@
             android:layout_marginBottom="18dp"
             android:backgroundTint="@color/on_primary"
             android:onClick="goToSignInPage"
-            android:text="Sign in"
+            android:text="Log In"
             android:textColor="@color/white" />
 
         <Button
@@ -50,43 +55,16 @@
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:backgroundTint="@color/primary"
-            android:drawableLeft="@drawable/icons8_google"
-            android:onClick="goToGoogle"
-            android:text="Sign in with Google"
+            android:onClick="goToSignUpPage"
+            android:text="Create Account"
             android:textColor="@color/on_primary" />
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="100" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Don't have an account? "
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/signUpTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/sign_up"
-            android:textColor="@color/blue"
-            android:onClick="goToSignUpPage"/>
-    </LinearLayout>
-
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="40" />
+        android:layout_weight="160" />
 
 </LinearLayout>
